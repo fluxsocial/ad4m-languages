@@ -1,0 +1,30 @@
+---
+manifest_version: 1
+name: sdp-expression
+uuid: 00000000-0000-0000-0000-000000000000
+properties: {
+  "enforce_spam_limit": 20,
+  "max_chunk_interval": 100000,
+  "active_agent_duration_ms": 7200,
+  "expression_data_schema": '{
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "$id": "https://junto.foundation/sdp.schema.json",
+    "title": "SDP",
+    "description": "A schema for SDP of webrtc",
+    "type": "object",
+    "properties": {
+      "type": {
+        "description": "The type of SDP",
+        "type": "string"
+      },
+      "sdp": {
+        "description": "The content of SDP",
+        "type": "string"
+      }
+    },
+    "required": [ "productId" ]
+  }',
+}
+zomes: 
+  - name: sdp
+    bundled: ../target/wasm32-unknown-unknown/release/sdp_expression.wasm
