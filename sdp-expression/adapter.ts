@@ -52,14 +52,7 @@ export default class SdpAdapter implements ExpressionAdapter {
       "get_expression_by_address",
       hash
     );
-    if (expression != null) {
-      const ad4mExpression: Expression = Object.assign(
-        expression.expression_data
-      );
-      return ad4mExpression;
-    } else {
-      return null;
-    }
+    return expression
   }
 
   /// Send an expression to someone privately p2p
