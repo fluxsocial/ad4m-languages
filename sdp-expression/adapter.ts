@@ -30,7 +30,7 @@ class SdpPutAdapter implements PublicSharing {
       "create_expression",
       expressionPostData
     );
-    return res.holochain_data.element.signed_header.header.hash.toString("hex");
+    return res.toString("hex");
   }
 }
 
