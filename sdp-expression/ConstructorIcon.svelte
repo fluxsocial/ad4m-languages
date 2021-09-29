@@ -108,8 +108,8 @@
     export let commitExpression
 
     let expData = {
-        body: "",
-        background: []
+        type: "",
+        sdp: ""
     };
 
     const addPicker = () => {
@@ -128,9 +128,9 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@simonwep/pickr/dist/themes/nano.min.css"/> <!-- 'nano' theme -->
 
 <div class="container" id="exp_container" bind:this={container} style="--theme-color: {colour}">
-    <div class="typings">
-        <textarea bind:value={expData.body} />
-    </div>
+    <!-- <div class="typings">
+        <textarea bind:value={expData.sdp} />
+    </div> -->
     <div class="clickings">
         <div class="picker-container">
             <span>Pickers</span>

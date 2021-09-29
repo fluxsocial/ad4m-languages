@@ -14,15 +14,17 @@ echo "Creating three releases of languages inside ./release"
 echo "Create SDP expression release..."
 
 #Get new dna.yaml with correct props & build language
-cp ./hc-dna/workdir/dna.yaml ./hc-dna/workdir/dna_origin.yaml
+[ ! -e "./hc-dna/workdir/dna_origin.yaml" ] && cp ./hc-dna/workdir/dna.yaml ./hc-dna/workdir/dna_origin.yaml
 cp ./sdp-expression/dna.yaml ./hc-dna/workdir/dna.yaml
 cd sdp-expression
-npm run build-nix
+npm install && npm run build-nix
+cd ..
 
 #Check if sdp directory exists, if not create
-[ ! -d "./release/sdp" ] && mkdir "./release/sdp"
+[ ! -d "./release/sdp" ] && mkdir -p "./release/sdp"
 
 #Copy the build files to the release dir
-cp ./build/bundle.js ./release/sdp/bundle.js
-cp ./hc-dna/workdir/sdp.dna ./release/sdp/sdp.dna
+cp ./sdp-expression/build/bundle.js ./release/sdp/bundle.js
+cp ./hc-dna/workdir/sdp-expression.dna ./release/sdp/sdp-expression.dna
+
 mv ./hc-dna/workdir/dna_origin.yaml ./hc-dna/workdir/dna.yaml

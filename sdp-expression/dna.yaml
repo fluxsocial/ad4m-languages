@@ -21,10 +21,9 @@ properties: {
         "description": "The content of SDP",
         "type": "string"
       }
-    },
-    "required": [ "productId" ]
+    }
   }',
 }
 zomes: 
-  - name: sdp
-    bundled: ../target/wasm32-unknown-unknown/release/sdp_expression.wasm
+  - name: generic_expression
+    bundled: ../target/wasm32-unknown-unknown/release/generic_expression.wasm

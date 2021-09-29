@@ -16,7 +16,7 @@ export default class SdpAuthorAdapter implements GetByAuthorAdapter {
     //TODO: resolve did
     const res = await this.#sdpDNA.call(
       DNA_NICK,
-      "sdp",
+      "generic_expression",
       "get_expression_by_author",
       { author: author, page_size: count, page_number: page }
     );

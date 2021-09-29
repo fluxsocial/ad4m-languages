@@ -26,7 +26,7 @@ class SdpPutAdapter implements PublicSharing {
     };
     const res = await this.#sdpDNA.call(
       DNA_NICK,
-      "sdp",
+      "generic_expression",
       "create_expression",
       expressionPostData
     );
@@ -48,7 +48,7 @@ export default class SdpAdapter implements ExpressionAdapter {
     const hash = Buffer.from(address, "hex");
     const expression = await this.#sdpDNA.call(
       DNA_NICK,
-      "sdp",
+      "generic_expression",
       "get_expression_by_address",
       hash
     );
@@ -67,7 +67,7 @@ export default class SdpAdapter implements ExpressionAdapter {
     //@ts-ignore
     const obj = JSON.parse(content);
 
-    this.#sdpDNA.call(DNA_NICK, "sdp", "send_private_expression", {
+    this.#sdpDNA.call(DNA_NICK, "generic_expression", "send_private_expression", {
       to: to,
       data: JSON.stringify(obj),
     });
@@ -81,7 +81,7 @@ export default class SdpAdapter implements ExpressionAdapter {
     }
     const res = await this.#sdpDNA.call(
       DNA_NICK,
-      "sdp",
+      "generic_expression",
       "inbox",
       { from: filterFrom, page_size: 0, page_number: 0 }
     );
