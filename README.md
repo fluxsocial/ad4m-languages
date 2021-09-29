@@ -10,3 +10,8 @@ git clone --recurse-submodules
 git pull --recurse-submodules
 ```
 
+## Release
+
+```shell
+./release.sh
+```
