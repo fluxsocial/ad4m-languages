@@ -1,0 +1,3 @@
+[submodule "hc-dna"]
+	path = hc-dna
+	url = git@github.com:juntofoundation/Generic-Expression.git
