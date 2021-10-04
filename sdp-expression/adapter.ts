@@ -54,39 +54,4 @@ export default class SdpAdapter implements ExpressionAdapter {
     );
     return expression
   }
-
-  /// Send an expression to someone privately p2p
-  send_private(to: Agent, content: object) {
-    //@ts-ignore
-    const obj = JSON.parse(content);
-
-    this.#sdpDNA.call(DNA_NICK, "generic_expression", "send_private_expression", {
-      to: to,
-      data: JSON.stringify(obj),
-    });
-  }
-
-  /// Get private expressions sent to you
-  async inbox(filterFrom: void | Agent[]): Promise<Expression[]> {
-    //TODO: add from & pages to inbox
-    if (filterFrom != null) {
-      filterFrom = filterFrom[0];
-    }
-    const res = await this.#sdpDNA.call(
-      DNA_NICK,
-      "generic_expression",
-      "inbox",
-      { from: filterFrom, page_size: 0, page_number: 0 }
-    );
-    const out = [];
-    res.forEach((expression) => {
-      out.push({
-        author: expression.creator,
-        timestamp: expression.created_at,
-        data: JSON.parse(expression),
-        proof: undefined,
-      });
-    });
-    return out;
-  }
 }
