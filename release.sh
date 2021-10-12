@@ -28,4 +28,21 @@ cd ..
 cp ./sdp-expression/build/bundle.js ./release/sdp/bundle.js
 cp ./hc-dna/workdir/sdp-expression.dna ./release/sdp/sdp-expression.dna
 
+# IceCandidate expression release
+echo "Create IceCandidate expression release..."
+
+# Get new dna.yaml with correct props & build language
+[ ! -e "./hc-dna/workdir/dna_origin.yaml" ] && cp ./hc-dna/workdir/dna.yaml ./hc-dna/workdir/dna_origin.yaml
+cp ./icecandidate-expression/dna.yaml ./hc-dna/workdir/dna.yaml
+cd icecandidate-expression
+npm install && npm run build-nix
+cd ..
+
+# Check if icecandidate directory exists, if not create
+[ ! -d "./release/icecandidate" ] && mkdir -p "./release/icecandidate"
+
+# Copy the build files to the release dir
+cp ./icecandidate-expression/build/bundle.js ./release/icecandidate/bundle.js
+cp ./hc-dna/workdir/icecandidate-expression.dna ./release/icecandidate/icecandidate-expression.dna
+
 mv ./hc-dna/workdir/dna_origin.yaml ./hc-dna/workdir/dna.yaml
