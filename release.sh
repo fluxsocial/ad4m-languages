@@ -45,4 +45,23 @@ cd ..
 cp ./icecandidate-expression/build/bundle.js ./release/icecandidate/bundle.js
 cp ./hc-dna/workdir/icecandidate-expression.dna ./release/icecandidate/icecandidate-expression.dna
 
+# ShortForm expression release begin
+echo "Create ShortForm expression release..."
+
+# Get new dna.yaml with correct props & build language
+[ ! -e "./hc-dna/workdir/dna_origin.yaml" ] && cp ./hc-dna/workdir/dna.yaml ./hc-dna/workdir/dna_origin.yaml
+[ ! -e "./config_origin.ts" ] && cp ./config.ts ./config_origin.ts
+cp ./shortform-expression/dna.yaml ./hc-dna/workdir/dna.yaml
+cp ./shortform-expression/config.ts ./config.ts
+npm install && npm run build-nix
+
+# Check if shortform directory exists, if not create
+[ ! -d "./release/shortform" ] && mkdir -p "./release/shortform"
+
+# Copy the build files to the release dir
+cp ./build/bundle.js ./release/shortform/bundle.js
+cp ./hc-dna/workdir/shortform-expression.dna ./release/shortform/shortform-expression.dna
+
+# Finish release process, move original files back
 mv ./hc-dna/workdir/dna_origin.yaml ./hc-dna/workdir/dna.yaml
+mv ./config_origin.ts ./config.ts
