@@ -16,7 +16,7 @@ export default {
   output: {
     sourcemap: true,
     format: "cjs",
-    name: "JuntoSdp",
+    // name: "JuntoDemo", // Can be passed through CLI if needed.
     file: "build/bundle.js",
   },
   plugins: [
