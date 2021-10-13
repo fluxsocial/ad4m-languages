@@ -50,9 +50,9 @@ echo "Create ShortForm expression release..."
 
 # Get new dna.yaml with correct props & build language
 [ ! -e "./hc-dna/workdir/dna_origin.yaml" ] && cp ./hc-dna/workdir/dna.yaml ./hc-dna/workdir/dna_origin.yaml
-[ ! -e "./config_origin.ts" ] && cp ./config.ts ./config_origin.ts
+[ ! -e "./dna_origin.js" ] && cp ./dna.js ./dna_origin.js
 cp ./shortform-expression/dna.yaml ./hc-dna/workdir/dna.yaml
-cp ./shortform-expression/config.ts ./config.ts
+cp ./shortform-expression/dna.js ./dna.js
 npm install && npm run build-nix
 
 # Check if shortform directory exists, if not create
@@ -64,4 +64,4 @@ cp ./hc-dna/workdir/shortform-expression.dna ./release/shortform/shortform-expre
 
 # Finish release process, move original files back
 mv ./hc-dna/workdir/dna_origin.yaml ./hc-dna/workdir/dna.yaml
-mv ./config_origin.ts ./config.ts
+mv ./dna_origin.js ./dna.js

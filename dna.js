@@ -1,4 +1,8 @@
-import DNA_NAME from 'index';
-import dna from `../hc-dna/workdir/${DNA_NAME}.dna`;
+import dna from "./hc-dna/workdir/demo-expression.dna";
 
 export const DNA = Buffer.from(dna, 'base64');
+
+export const CONFIG = {
+    "languageName": "junto-demo",
+    "dnaName": "demo-expression"
+};

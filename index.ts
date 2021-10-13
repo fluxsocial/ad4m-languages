@@ -1,8 +1,7 @@
 import type { Address, Agent, Language, HolochainLanguageDelegate, LanguageContext, Interaction} from "@perspect3vism/ad4m";
 import GenericExpressionAdapter from "./adapter";
 import GenericExpressionAuthorAdapter from "./authorAdapter";
-import DNA from "./dna";
-import { CONFIG } from "./config";
+import { CONFIG, DNA } from "./dna";
 
 function interactions(expression: Address): Interaction[] {
   return [];
@@ -19,7 +18,7 @@ export default async function create(context: LanguageContext): Promise<Language
   const authorAdaptor = new GenericExpressionAuthorAdapter(context);
 
   return {
-    LANGUAGE_NAME,
+    name: LANGUAGE_NAME,
     expressionAdapter,
     authorAdaptor,
     interactions,
