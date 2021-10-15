@@ -16,13 +16,6 @@ properties: {
       "body": {
         "description": "The body of the shortform",
         "type": "string"
-      },
-      "background": {
-        "description": "The context of the shortform",
-        "type": "array",
-        "items": {
-          "type": "string"
-        }
       }
     }
   }',
