@@ -12,3 +12,4 @@ node_modules
 !*.config.js
 build
 release/
+.DS_Store
