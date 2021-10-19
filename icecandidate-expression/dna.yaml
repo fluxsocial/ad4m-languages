@@ -24,7 +24,7 @@ properties: {
       "sdpMLineIndex": {
         "description": "Indicating the zero-based index number of the media description in the SDP with which the candidate is associated.",
         "type": ["integer", "null"]
-      },
+      }
     }
   }',
 }
