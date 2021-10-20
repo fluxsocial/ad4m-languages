@@ -8,11 +8,11 @@ function interactions(expression: Address): Interaction[] {
 }
 
 export const LANGUAGE_NAME = CONFIG.languageName;
-export const DNA_NAME = CONFIG.dnaName;
+export const name = CONFIG.dnaName;
 
 export default async function create(context: LanguageContext): Promise<Language> {
   const Holochain = context.Holochain as HolochainLanguageDelegate;
-  await Holochain.registerDNAs([{ file: DNA, nick: DNA_NAME }]);
+  await Holochain.registerDNAs([{ file: DNA, nick: name }]);
 
   const expressionAdapter = new GenericExpressionAdapter(context);
   const authorAdaptor = new GenericExpressionAuthorAdapter(context);

@@ -1,5 +1,5 @@
 import type { Address, Agent, Expression, ExpressionAdapter, PublicSharing, HolochainLanguageDelegate, LanguageContext, AgentService } from "@perspect3vism/ad4m";
-import { DNA_NAME } from "./index";
+import { name } from "./index";
 
 class GenericExpressionPutAdapter implements PublicSharing {
   #agent: AgentService;
@@ -25,7 +25,7 @@ class GenericExpressionPutAdapter implements PublicSharing {
       proof: expression.proof,
     };
     const res = await this.#genericExpressionDNA.call(
-      DNA_NAME,
+      name,
       "generic_expression",
       "create_expression",
       expressionPostData
@@ -47,7 +47,7 @@ export default class GenericExpressionAdapter implements ExpressionAdapter {
   async get(address: Address): Promise<Expression> {
     const hash = Buffer.from(address, "hex");
     const expression = await this.#genericExpressionDNA.call(
-      DNA_NAME,
+      name,
       "generic_expression",
       "get_expression_by_address",
       hash

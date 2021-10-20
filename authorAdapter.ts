@@ -1,5 +1,5 @@
 import type { Expression, Agent, GetByAuthorAdapter, HolochainLanguageDelegate, LanguageContext } from "@perspect3vism/ad4m";
-import { DNA_NAME } from "./index";
+import { name } from "./index";
 export default class GenericExpressionAuthorAdapter implements GetByAuthorAdapter {
   #dna: HolochainLanguageDelegate;
 
@@ -15,7 +15,7 @@ export default class GenericExpressionAuthorAdapter implements GetByAuthorAdapte
   ): Promise<Expression[]> {
     //TODO: resolve did
     const res = await this.#dna.call(
-      DNA_NAME,
+      name,
       "generic_expression",
       "get_expression_by_author",
       { author: author, page_size: count, page_number: page }
