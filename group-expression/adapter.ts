@@ -23,8 +23,8 @@ class GenericExpressionPutAdapter implements PublicSharing {
     this.#IPFS = context.IPFS;
   }
 
-  async createPublic(obj: object): Promise<Address> {
-    const expression = this.#agent.createSignedExpression(obj);
+  async createPublic(groupData: object): Promise<Address> {
+    let expression = this.#agent.createSignedExpression(groupData);
 
     if (expression.data.image) {
       const ipfsAddress = await this.#IPFS.add({content: expression.data.image});
@@ -68,7 +68,7 @@ class GenericExpressionPutAdapter implements PublicSharing {
 
 export default class GenericExpressionAdapter implements ExpressionAdapter {
   #genericExpressionDNA: HolochainLanguageDelegate;
-  #IPFS: IPFSNode
+  #IPFS: IPFSNode;
 
   putAdapter: PublicSharing;
 
