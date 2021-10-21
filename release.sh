@@ -81,4 +81,4 @@ cp ./hc-dna/workdir/group-expression.dna ./release/group/group-expression.dna
 ################### Finish release process, move original files back ###################
 mv ./hc-dna/workdir/dna_origin.yaml ./hc-dna/workdir/dna.yaml
 mv ./dna_origin.js ./dna.js
-mv ./adapter_origin.ts ./adapter.js
+mv ./adapter_origin.ts ./adapter.ts
