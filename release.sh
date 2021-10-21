@@ -7,15 +7,18 @@ then
     exit
 fi
 
-echo "Creating three releases of languages inside ./release"
-
+################### Begin release process ###################
+echo "Creating releases of languages inside ./release"
 [ ! -d "./release" ] && mkdir "./release"
+
+[ ! -e "./hc-dna/workdir/dna_origin.yaml" ] && cp ./hc-dna/workdir/dna.yaml ./hc-dna/workdir/dna_origin.yaml
+[ ! -e "./dna_origin.js" ] && cp ./dna.js ./dna_origin.js
+[ ! -e "./adapter_origin.ts" ] && cp ./adapter.ts ./adapter_origin.ts
 
 ################### SDP expression release ###################
 echo "Create SDP expression release..."
 
 # Get new dna.yaml with correct props & build language
-[ ! -e "./hc-dna/workdir/dna_origin.yaml" ] && cp ./hc-dna/workdir/dna.yaml ./hc-dna/workdir/dna_origin.yaml
 cp ./sdp-expression/dna.yaml ./hc-dna/workdir/dna.yaml
 cd sdp-expression
 npm install && npm run build-nix
@@ -32,7 +35,6 @@ cp ./hc-dna/workdir/sdp-expression.dna ./release/sdp/sdp-expression.dna
 echo "Create IceCandidate expression release..."
 
 # Get new dna.yaml with correct props & build language
-[ ! -e "./hc-dna/workdir/dna_origin.yaml" ] && cp ./hc-dna/workdir/dna.yaml ./hc-dna/workdir/dna_origin.yaml
 cp ./icecandidate-expression/dna.yaml ./hc-dna/workdir/dna.yaml
 cd icecandidate-expression
 npm install && npm run build-nix
@@ -49,8 +51,6 @@ cp ./hc-dna/workdir/icecandidate-expression.dna ./release/icecandidate/icecandid
 echo "Create ShortForm expression release..."
 
 # Get new dna.yaml with correct props & build language
-[ ! -e "./hc-dna/workdir/dna_origin.yaml" ] && cp ./hc-dna/workdir/dna.yaml ./hc-dna/workdir/dna_origin.yaml
-[ ! -e "./dna_origin.js" ] && cp ./dna.js ./dna_origin.js
 cp ./shortform-expression/dna.yaml ./hc-dna/workdir/dna.yaml
 cp ./shortform-expression/dna.js ./dna.js
 npm install && npm run build-nix
@@ -66,10 +66,9 @@ cp ./hc-dna/workdir/shortform-expression.dna ./release/shortform/shortform-expre
 echo "Create Group expression release..."
 
 # Get new dna.yaml with correct props & build language
-[ ! -e "./hc-dna/workdir/dna_origin.yaml" ] && cp ./hc-dna/workdir/dna.yaml ./hc-dna/workdir/dna_origin.yaml
-[ ! -e "./dna_origin.js" ] && cp ./dna.js ./dna_origin.js
 cp ./group-expression/dna.yaml ./hc-dna/workdir/dna.yaml
 cp ./group-expression/dna.js ./dna.js
+cp ./group-expression/adapter.ts ./adapter.ts
 npm install && npm run build-nix
 
 # Check if release/group directory exists, if not create one
@@ -82,3 +81,4 @@ cp ./hc-dna/workdir/group-expression.dna ./release/group/group-expression.dna
 ################### Finish release process, move original files back ###################
 mv ./hc-dna/workdir/dna_origin.yaml ./hc-dna/workdir/dna.yaml
 mv ./dna_origin.js ./dna.js
+mv ./adapter_origin.ts ./adapter.js
