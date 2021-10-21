@@ -96,7 +96,7 @@ export default class GenericExpressionAdapter implements ExpressionAdapter {
         const imageChunk = await this.#IPFS.cat(imageAddr);
 
         // @ts-ignore
-        for (const chunk of imageChunk) {
+        for await (const chunk of imageChunk) {
           chunks.push(chunk)
         }
 
@@ -112,7 +112,7 @@ export default class GenericExpressionAdapter implements ExpressionAdapter {
         const thumbnailChunk = await this.#IPFS.cat(thumbnailAddr);
 
         // @ts-ignore
-        for (const chunk of thumbnailChunk) {
+        for await (const chunk of thumbnailChunk) {
           chunks.push(chunk)
         }
 
