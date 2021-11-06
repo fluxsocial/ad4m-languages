@@ -35,15 +35,14 @@ echo "Create IceCandidate expression release..."
 
 # Get new dna.yaml with correct props & build language
 cp ./icecandidate-expression/dna.yaml ./hc-dna/workdir/dna.yaml
-cd icecandidate-expression
+cp ./icecandidate-expression/dna.js ./dna.js
 npm install && npm run build-nix
-cd ..
 
 # Check if icecandidate directory exists, if not create
 [ ! -d "./release/icecandidate" ] && mkdir -p "./release/icecandidate"
 
 # Copy the build files to the release dir
-cp ./icecandidate-expression/build/bundle.js ./release/icecandidate/bundle.js
+cp ./build/bundle.js ./release/icecandidate/bundle.js
 cp ./hc-dna/workdir/icecandidate-expression.dna ./release/icecandidate/icecandidate-expression.dna
 
 ################### ShortForm expression release begin ###################
