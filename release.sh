@@ -20,15 +20,14 @@ echo "Create SDP expression release..."
 
 # Get new dna.yaml with correct props & build language
 cp ./sdp-expression/dna.yaml ./hc-dna/workdir/dna.yaml
-cd sdp-expression
+cp ./sdp-expression/dna.js ./dna.js
 npm install && npm run build-nix
-cd ..
 
 # Check if sdp directory exists, if not create
 [ ! -d "./release/sdp" ] && mkdir -p "./release/sdp"
 
 # Copy the build files to the release dir
-cp ./sdp-expression/build/bundle.js ./release/sdp/bundle.js
+cp ./build/bundle.js ./release/sdp/bundle.js
 cp ./hc-dna/workdir/sdp-expression.dna ./release/sdp/sdp-expression.dna
 
 ################### IceCandidate expression release ###################
