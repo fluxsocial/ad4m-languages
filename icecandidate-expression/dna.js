@@ -1,4 +1,8 @@
-import dna from '../hc-dna/workdir/icecandidate-expression.dna'
+import dna from "./hc-dna/workdir/icecandidate-expression.dna";
 
-export const DNA = Buffer.from(dna, 'base64')
-export const DNA_NICK = "junto-icecandidate"
+export const DNA = Buffer.from(dna, 'base64');
+
+export const CONFIG = {
+    "languageName": "junto-icecandidate",
+    "dnaName": "icecandidate-expression"
+};
