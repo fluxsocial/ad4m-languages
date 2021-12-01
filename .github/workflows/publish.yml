@@ -16,6 +16,8 @@ jobs:
     steps:
     - name: Fetch source code
       uses: actions/checkout@v2
+      with:
+        submodules: 'recursive'
     - name: Use Nix
       uses: cachix/install-nix-action@v12
     - name: Use Node.js ${{ matrix.node-version }}
