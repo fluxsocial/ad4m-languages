@@ -32,6 +32,6 @@ jobs:
         name: perspect3vism
         # authToken: '${{ secrets.CACHIX_HOLOCHAIN_CI }}'
     - name: Prepare Nix environment
-      run: nix-shell --command "echo Completed"
+      run: nix-shell hc-dna/default.nix --command "echo Completed"
     - name: Release languages
       run: ./release.sh
