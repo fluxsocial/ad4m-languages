@@ -47,4 +47,5 @@ jobs:
       uses: ncipollo/release-action@v1
       with:
         artifacts: "shortform-expression.js, group-expression.js, sdp-expression.js, icecandidate-expression.js"
-        token: ${{ secrets.GITHUB_TOKEN }}    
+        token: ${{ secrets.GITHUB_TOKEN }}
+        allowUpdates: true  
