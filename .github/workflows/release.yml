@@ -1,8 +1,9 @@
 name: CI
 
 on:
-  pull_request:
-    branches: [ master ]
+  push:
+    tags:
+    - '*'
 
 jobs:
   release:
@@ -36,14 +37,14 @@ jobs:
     - name: Prepare Nix environment
       run: nix-shell hc-dna/default.nix --command "echo Completed"
     - name: Release languages
-      run: ./release.sh
-    - name: Release languages
       run: |
+        ./release.sh
         cp ./release/shortform/bundle.js ./shortform-expression.js
         cp ./release/group/bundle.js ./group-expression.js
         cp ./release/sdp/bundle.js ./sdp-expression.js
         cp ./release/icecandidate/bundle.js ./icecandidate-expression.js
-    - uses: ncipollo/release-action@v1
+    - name: Upload released files
+      uses: ncipollo/release-action@v1
       with:
         artifacts: "shortform-expression.js, group-expression.js, sdp-expression.js, icecandidate-expression.js"
         token: ${{ secrets.GITHUB_TOKEN }}    
