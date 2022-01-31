@@ -1,4 +1,5 @@
-import type { Address, Agent, Expression, ExpressionAdapter, PublicSharing, HolochainLanguageDelegate, LanguageContext, AgentService, IPFSNode } from "@perspect3vism/ad4m";
+import type { Address, Expression, ExpressionAdapter, PublicSharing, HolochainLanguageDelegate, LanguageContext, AgentService } from "@perspect3vism/ad4m";
+import type { IPFS } from "ipfs-core-types";
 import { name } from "./index";
 
 const _appendBuffer = (buffer1, buffer2) => {
@@ -15,7 +16,7 @@ const uint8ArrayConcat = (chunks) => {
 class GenericExpressionPutAdapter implements PublicSharing {
   #agent: AgentService;
   #genericExpressionDNA: HolochainLanguageDelegate;
-  #IPFS: IPFSNode;
+  #IPFS: IPFS;
 
   constructor(context: LanguageContext) {
     this.#agent = context.agent;
@@ -68,7 +69,7 @@ class GenericExpressionPutAdapter implements PublicSharing {
 
 export default class GenericExpressionAdapter implements ExpressionAdapter {
   #genericExpressionDNA: HolochainLanguageDelegate;
-  #IPFS: IPFSNode;
+  #IPFS: IPFS;
 
   putAdapter: PublicSharing;
 

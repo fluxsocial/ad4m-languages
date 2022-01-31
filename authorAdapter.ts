@@ -1,5 +1,6 @@
-import type { Expression, Agent, GetByAuthorAdapter, HolochainLanguageDelegate, LanguageContext } from "@perspect3vism/ad4m";
+import type { Expression, GetByAuthorAdapter, HolochainLanguageDelegate, LanguageContext } from "@perspect3vism/ad4m";
 import { name } from "./index";
+
 export default class GenericExpressionAuthorAdapter implements GetByAuthorAdapter {
   #dna: HolochainLanguageDelegate;
 

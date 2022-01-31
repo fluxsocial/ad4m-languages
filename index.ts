@@ -1,10 +1,14 @@
-import type { Address, Agent, Language, HolochainLanguageDelegate, LanguageContext, Interaction} from "@perspect3vism/ad4m";
+import type { Address, Language, HolochainLanguageDelegate, LanguageContext, Interaction} from "@perspect3vism/ad4m";
 import GenericExpressionAdapter from "./adapter";
 import GenericExpressionAuthorAdapter from "./authorAdapter";
 import { CONFIG, DNA } from "./dna";
 
 function interactions(expression: Address): Interaction[] {
   return [];
+}
+
+function isImmutableExpression(expression: Address): boolean {
+  return true
 }
 
 export const LANGUAGE_NAME = CONFIG.languageName;
@@ -22,5 +26,6 @@ export default async function create(context: LanguageContext): Promise<Language
     expressionAdapter,
     authorAdaptor,
     interactions,
+    isImmutableExpression
   } as Language;
 }
