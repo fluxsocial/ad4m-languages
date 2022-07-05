@@ -1,41 +1,49 @@
 ---
 manifest_version: 1
 name: group-expression
-uid: 00000000-0000-0000-0000-000000000000
-properties: {
-  "enforce_spam_limit": 20,
-  "max_chunk_interval": 100000,
-  "active_agent_duration_ms": 7200,
-  "expression_data_schema": '{
-    "$schema": "https://json-schema.org/draft/2020-12/schema",
-    "$id": "https://junto.foundation/group.schema.json",
-    "title": "Group",
-    "description": "The metadata of a flux group",
-    "type": "object",
-    "properties": {
-      "name": {
-        "description": "The name of the goup",
-        "type": "string",
-        "maxLength": 64
-      },
-      "description": {
-        "description": "The description of the goup",
-        "type": "string",
-        "maxLength": 512
-      },
-      "imageAddr": {
-        "description": "The image of the goup",
-        "type": "string",
-        "maxLength": 512
-      },
-      "thumbnailAddr": {
-        "description": "The thumbnail of the goup",
-        "type": "string",
-        "maxLength": 512
+integrity:
+  uid: 00000000-0000-0000-0000-000000000000
+  properties: {
+    "enforce_spam_limit": 20,
+    "max_chunk_interval": 100000,
+    "active_agent_duration_ms": 7200,
+    "expression_data_schema": '{
+      "$schema": "https://json-schema.org/draft/2020-12/schema",
+      "$id": "https://junto.foundation/group.schema.json",
+      "title": "Group",
+      "description": "The metadata of a flux group",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "The name of the goup",
+          "type": "string",
+          "maxLength": 64
+        },
+        "description": {
+          "description": "The description of the goup",
+          "type": "string",
+          "maxLength": 512
+        },
+        "imageAddr": {
+          "description": "The image of the goup",
+          "type": "string",
+          "maxLength": 512
+        },
+        "thumbnailAddr": {
+          "description": "The thumbnail of the goup",
+          "type": "string",
+          "maxLength": 512
+        }
       }
-    }
-  }',
-}
-zomes: 
-  - name: generic_expression
-    bundled: ../target/wasm32-unknown-unknown/release/generic_expression.wasm
+    }',
+  }
+  origin_time: 2022-02-11T23:05:19.470323Z
+  zomes:
+    - name: generic_expression_integrity
+      bundled: ../target/wasm32-unknown-unknown/release/generic_expression_integrity.wasm
+coordinator:
+  zomes:
+    - name: generic_expression
+      bundled: ../target/wasm32-unknown-unknown/release/generic_expression.wasm
+      dependencies:
+        - name: generic_expression_integrity

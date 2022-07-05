@@ -11,6 +11,7 @@ function isImmutableExpression(expression: Address): boolean {
   return true
 }
 
+//@ad4m-template-variable
 export const LANGUAGE_NAME = CONFIG.languageName;
 export const name = CONFIG.dnaName;
 

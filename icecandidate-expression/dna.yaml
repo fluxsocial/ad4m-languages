@@ -1,33 +1,41 @@
 ---
 manifest_version: 1
 name: icecandidate-expression
-uid: 00000000-0000-0000-0000-000000000000
-properties: {
-  "enforce_spam_limit": 20,
-  "max_chunk_interval": 100000,
-  "active_agent_duration_ms": 7200,
-  "expression_data_schema": '{
-    "$schema": "https://json-schema.org/draft/2020-12/schema",
-    "$id": "https://junto.foundation/icecandidate.schema.json",
-    "title": "IceCandidate",
-    "description": "A schema for IceCandidate of webrtc",
-    "type": "object",
-    "properties": {
-      "candidate": {
-        "description": "Representing the transport address for the candidate that can be used for connectivity checks.",
-        "type": "string"
-      },
-      "sdpMid": {
-        "description": "Specifying the candidate media stream identification tag which uniquely identifies the media stream.",
-        "type": ["string", "null"]
-      },
-      "sdpMLineIndex": {
-        "description": "Indicating the zero-based index number of the media description in the SDP with which the candidate is associated.",
-        "type": ["integer", "null"]
+integrity:
+  uid: 00000000-0000-0000-0000-000000000000
+  properties: {
+    "enforce_spam_limit": 20,
+    "max_chunk_interval": 100000,
+    "active_agent_duration_ms": 7200,
+    "expression_data_schema": '{
+      "$schema": "https://json-schema.org/draft/2020-12/schema",
+      "$id": "https://junto.foundation/icecandidate.schema.json",
+      "title": "IceCandidate",
+      "description": "A schema for IceCandidate of webrtc",
+      "type": "object",
+      "properties": {
+        "candidate": {
+          "description": "Representing the transport address for the candidate that can be used for connectivity checks.",
+          "type": "string"
+        },
+        "sdpMid": {
+          "description": "Specifying the candidate media stream identification tag which uniquely identifies the media stream.",
+          "type": ["string", "null"]
+        },
+        "sdpMLineIndex": {
+          "description": "Indicating the zero-based index number of the media description in the SDP with which the candidate is associated.",
+          "type": ["integer", "null"]
+        }
       }
-    }
-  }',
-}
-zomes: 
-  - name: generic_expression
-    bundled: ../target/wasm32-unknown-unknown/release/generic_expression.wasm
+    }',
+  }
+  origin_time: 2022-02-11T23:05:19.470323Z
+  zomes:
+    - name: generic_expression_integrity
+      bundled: ../target/wasm32-unknown-unknown/release/generic_expression_integrity.wasm
+coordinator:
+  zomes:
+    - name: generic_expression
+      bundled: ../target/wasm32-unknown-unknown/release/generic_expression.wasm
+      dependencies:
+        - name: generic_expression_integrity

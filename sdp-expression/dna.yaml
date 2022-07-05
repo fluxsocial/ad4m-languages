@@ -1,29 +1,37 @@
 ---
 manifest_version: 1
 name: sdp-expression
-uid: 00000000-0000-0000-0000-000000000000
-properties: {
-  "enforce_spam_limit": 20,
-  "max_chunk_interval": 100000,
-  "active_agent_duration_ms": 7200,
-  "expression_data_schema": '{
-    "$schema": "https://json-schema.org/draft/2020-12/schema",
-    "$id": "https://junto.foundation/sdp.schema.json",
-    "title": "SDP",
-    "description": "A schema for SDP of webrtc",
-    "type": "object",
-    "properties": {
-      "type": {
-        "description": "The type of SDP",
-        "type": "string"
-      },
-      "sdp": {
-        "description": "The content of SDP",
-        "type": "string"
+integrity:
+  uid: 00000000-0000-0000-0000-000000000000
+  properties: {
+    "enforce_spam_limit": 20,
+    "max_chunk_interval": 100000,
+    "active_agent_duration_ms": 7200,
+    "expression_data_schema": '{
+      "$schema": "https://json-schema.org/draft/2020-12/schema",
+      "$id": "https://junto.foundation/sdp.schema.json",
+      "title": "SDP",
+      "description": "A schema for SDP of webrtc",
+      "type": "object",
+      "properties": {
+        "type": {
+          "description": "The type of SDP",
+          "type": "string"
+        },
+        "sdp": {
+          "description": "The content of SDP",
+          "type": "string"
+        }
       }
-    }
-  }',
-}
-zomes: 
-  - name: generic_expression
-    bundled: ../target/wasm32-unknown-unknown/release/generic_expression.wasm
+    }',
+  }
+  origin_time: 2022-02-11T23:05:19.470323Z
+  zomes:
+    - name: generic_expression_integrity
+      bundled: ../target/wasm32-unknown-unknown/release/generic_expression_integrity.wasm
+coordinator:
+  zomes:
+    - name: generic_expression
+      bundled: ../target/wasm32-unknown-unknown/release/generic_expression.wasm
+      dependencies:
+        - name: generic_expression_integrity
