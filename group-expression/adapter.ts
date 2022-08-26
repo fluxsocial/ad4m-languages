@@ -25,42 +25,35 @@ class GenericExpressionPutAdapter implements PublicSharing {
   }
 
   async createPublic(groupData: object): Promise<Address> {
-    let expression = this.#agent.createSignedExpression(groupData);
-
-    if (expression.data.image) {
-      const ipfsAddress = await this.#IPFS.add({content: expression.data.image});
+    if (groupData["image"]) {
+      const ipfsAddress = await this.#IPFS.add({content: groupData["image"]});
 
       // @ts-ignore
       const ipfsHash = ipfsAddress.cid.toString();
 
-      expression.data.imageAddr = ipfsHash;
+      groupData["imageAddr"] = `ipfs://${ipfsHash}`;
+      delete groupData["image"];
     }
 
 
-    if (expression.data.thumbnail) {
-      const ipfsAddress = await this.#IPFS.add({content: expression.data.thumbnail});
+    if (groupData["thumbnail"]) {
+      const ipfsAddress = await this.#IPFS.add({content: groupData["thumbnail"]});
 
       // @ts-ignore
       const ipfsHash = ipfsAddress.cid.toString();
 
-      expression.data.thumbnailAddr = ipfsHash;
+      groupData["thumbnailAddr"] = `ipfs://${ipfsHash}`;
+      delete groupData["thumbnail"];
     }
+
+    const data = JSON.stringify(groupData);
+    const expression = this.#agent.createSignedExpression(data);
 
     const res = await this.#genericExpressionDNA.call(
       name,
       "generic_expression",
       "create_expression",
-      {
-        author: expression.author,
-        data: JSON.stringify({
-          name: expression.data.name,
-          description: expression.data.description,
-          imageAddr: expression.data.imageAddr,
-          thumbnailAddr: expression.data.thumbnailAddr
-        }),
-        timestamp: expression.timestamp,
-        proof: expression.proof,
-      }
+      expression
     );
 
     return res.toString("hex");
@@ -87,55 +80,6 @@ export default class GenericExpressionAdapter implements ExpressionAdapter {
       "get_expression_by_address",
       hash
     );
-    if (expression != null) {
-      let cloneRes = Object.assign({}, expression);
-
-      let imageAddr = cloneRes.data.imageAddr
-      if(imageAddr) {
-        const chunks = [];
-
-        const imageChunk = await this.#IPFS.cat(imageAddr);
-
-        // @ts-ignore
-        for await (const chunk of imageChunk) {
-          chunks.push(chunk)
-        }
-
-        const fileString = Buffer.from(uint8ArrayConcat(chunks)).toString();
-
-        cloneRes.data.image = fileString;
-      }
-
-      let thumbnailAddr = cloneRes.data.thumbnailAddr;
-      if(thumbnailAddr) {
-        const chunks = [];
-
-        const thumbnailChunk = await this.#IPFS.cat(thumbnailAddr);
-
-        // @ts-ignore
-        for await (const chunk of thumbnailChunk) {
-          chunks.push(chunk)
-        }
-
-        const fileString = Buffer.from(uint8ArrayConcat(chunks)).toString();
-
-        cloneRes.data.thumbnail = fileString;
-      }
-
-      const expressionSer = {
-        author: cloneRes.author,
-        data: {
-          name: cloneRes.data.name,
-          description: cloneRes.data.description,
-          image: cloneRes.data.image,
-          thumbnail: cloneRes.data.thumbnail
-        },
-        timestamp: cloneRes.timestamp,
-        proof: cloneRes.proof,
-      } as Expression;
-      return expressionSer;
-    } else {
-      return null;
-    }
+    return expression;
   }
 }
